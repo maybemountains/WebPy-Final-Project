@@ -19,6 +19,9 @@
 
 <body>
     {% for message in ride.chat %}
+    <!-- display messages in the form
+            driver : hello
+            rider : hi! -->
     <p>{{message.sender}} : {{message.message}}</p>
     {% endfor %} 
     <form method="post">

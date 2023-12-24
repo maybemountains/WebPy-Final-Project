@@ -41,6 +41,7 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 babel.init_app(app, locale_selector=get_locale)
 
+#region Mail Stuff
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = 2525
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
@@ -49,6 +50,7 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 
 gay = Mail(app)
+#endregion
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -100,24 +102,27 @@ usersWaiting = []
 @app.route('/', methods=['GET', 'POST'])
 @login_required
 def welcomePage():
+        # if you already have a ride that you're waiting for, redirect to the waitForDriver Page
         if (usersWaiting.count(current_user.id) > 0):
             return redirect('/waitForDriver')
 
         possibleRide = rideCollection.find_one({"riderId": current_user.id})
+        # if there are possibleRides (aka someone's selected your ride) go to the ride page
         if (possibleRide is not None):
             return redirect(f'/ride/{possibleRide.get("_id")}')
 
-
         possibleRide = rideCollection.find_one({"driverId": current_user.id})
+        # do the same but if you're a driver instead of a rider
         if (possibleRide is not None):
             return redirect(f'/ride/{possibleRide.get("_id")}')
         
+        # if the user is a driver, redirect them to the pickRide page
         if (current_user.isDriver):
             return redirect('/pickRide')
 
         form = RequestRide()
         
-        form.carType.choices = [(i['carType'], i['carType']) for i in carCollection.find()]
+        form.carType.choices = [(i['carType'], i['carType']) for i in carCollection.find()] # find the possible carTypes so we can have drop down in our form
         if form.validate_on_submit():
             long = form.long.data 
             lat = form.lat.data
@@ -129,10 +134,11 @@ def welcomePage():
             cardNumber = form.cardNumber.data
             cardExpirationDate = form.cardExpirationDate.data
             cardCVV = form.cardCVV.data
-            if (carType not in pendingRideRequests):
-                pendingRideRequests[carType] = []
+            if (carType not in pendingRideRequests): # if the carType isnt in the pendingRideReqests dictionary
+                pendingRideRequests[carType] = [] # add the carType and attach an empty list
+            # append all of the ride information as a dictionary into the list
             pendingRideRequests[carType].append({'long': long, 'lat': lat, 'pickupLong': pickupLong, 'pickupLat': pickupLat, 'time': time, 'carType': carType, 'cardHolderName': cardHolderName, 'cardNumber': cardNumber, 'cardExpirationDate': cardExpirationDate, 'cardCVV': cardCVV, 'riderId': current_user.id})
-            usersWaiting.append(current_user.id)
+            usersWaiting.append(current_user.id) # add the current user to the waiting users list
             return redirect('/waitForDriver')
         # otherwise, show the ride request form.
         return render_template('requestRide.html', form=form)
@@ -140,24 +146,31 @@ def welcomePage():
 @app.route('/waitForDriver')
 @login_required
 def waitForDriver():
+    # if youre a driver, you can't wait for a driver so redirect to the index
     if (current_user.isDriver):
         return redirect('/')
 
     possibleRide = rideCollection.find_one({"riderId": current_user.id})
+    #if someone's selected ur ride, instead of waiting go to the ride information
     if (possibleRide is not None):
         return redirect('/ride/' + str(possibleRide.get('_id')))
     
+    # if you're not waiting and there's no rides you're currently on, redirect to the index
     if (possibleRide is None and usersWaiting.count(current_user.id) == 0):
         return redirect('/')
 
+    # otherwise you're just waiting for the driver
     return render_template('waitForDriver.html')
 
 @app.route('/ridePreCancel')
 @login_required
 def ridePreCancel():
+    # if you're a driver, you can't cancel 
     if (current_user.isDriver):
         return redirect('/')
+    # othrwise remove urself from the waiting list
     usersWaiting.remove(current_user.id)
+    # remove the request from the pending ride requests
     for k, v in pendingRideRequests.items():
         for i in v:
             if (i.get("riderId") == current_user.id):
@@ -169,43 +182,48 @@ def ridePreCancel():
 @app.route('/pickRide')
 @login_required
 def pickRide():
+    # if you're not a driver, go back to the index because you can't be here
     if (not current_user.isDriver):
         return redirect('/')
-    
+    # otherwise, see all pending ride equests
     return render_template('pickRide.html', pendingRideRequests=pendingRideRequests)
 
 @app.route('/selectRide/<carType>/<riderId>')
 @login_required
 def selectRide(carType, riderId):
+    # if you're not a driver, or ur carType wasn't rquested, redirect back to the index bc you can't select this ride
     if (not current_user.isDriver or carType not in pendingRideRequests):
         return redirect('/')
     carInfo = carCollection.find_one({"driverID": current_user.id})
-    cType = carInfo.get('carType')
+    cType = carInfo.get('carType') #carType as a variable because i didnt want to use .get() everytime i needed the carType
     for i in pendingRideRequests[cType]:
         if (i.get('riderId') == int(riderId)):
             i['driverId'] = current_user.id
             i['price'] = random.randint(69, 420)
             i['chat'] = []
-            # Combine with a specific date (you can adjust the date as needed)  
+            # turn time & date into a string bc mongodb can not handle JUST a datetime.date or datetime.time, and I don't think we needed
+            # the actual information in its time and date format
             i['time'] = i.get('time').strftime("%H:%M:%S")
             i['cardExpirationDate'] = i.get('cardExpirationDate').strftime("%Y-%m-%d")
-            ride = rideCollection.insert_one(i)
-            pendingRideRequests[cType].remove(i)
-            usersWaiting.remove(riderId)
-            return redirect('/ride/' + str(ride._id))
-        
+            ride = rideCollection.insert_one(i) # add all of the above to our rides collection
+            pendingRideRequests[cType].remove(i) # remove it from the unpicked requests
+            usersWaiting.remove(riderId) # remove the user from the waiting list
+            return redirect('/ride/' + str(ride._id)) # redirect to ride details
     return redirect('/pickRide')
 
 @app.route('/ride/<rideId>')
 @login_required
 def ride(rideId):
     ride = rideCollection.find_one({"_id": ObjectId(rideId)})
+    # if there is no ride, or the user ids don't match, redirect to the index
     if (ride is None or (ride.get('riderId') != current_user.id and ride.get('driverId') != current_user.id)):
         return redirect('/')
     
+    # if the ride has arrived, remove the ride from the collection, and redirect everyone to the invoice page
     if (ride.get('arrived')):
         rideCollection.delete_one({"_id": ObjectId(rideId)})
         return redirect('/ride/' + rideId + '/invoice')
+    
     # Define coordinates of points
     pickup = [float(ride['pickupLong']), float(ride['pickupLat'])]
     dest = [float(ride['long']), float(ride['lat'])]
@@ -217,7 +235,7 @@ def ride(rideId):
     folium.Marker(pickup, popup='Pickup').add_to(map)
     folium.Marker(dest, popup='Destination').add_to(map)
 
-     # Draw line between point A and point B
+    # Draw line between point A and point B
     folium.PolyLine(locations=[pickup, dest], color="pink", weight=3, opacity=1).add_to(map)
     return render_template('ride.html', ride=ride, map=map._repr_html_())
 
@@ -230,14 +248,16 @@ class RideChatForm(FlaskForm):
 @login_required
 def chat(rideId):
     ride = rideCollection.find_one({"_id": ObjectId(rideId)})
+    # ditto as always if there's no ride there cant be a ride chat and so everyone's redirected back to the index
     if (ride is None or (ride.get("riderId") != current_user.id and ride.get("driverId") != current_user.id) or ride.get("arrived")):
         return redirect('/')
     
     form = RideChatForm()
+    # the sender is a rider if the current user's id is the riderID, otherwise they'd be the driver
     sender = gettext('rider') if ride.get("riderId") == current_user.id else gettext('driver')
     if (form.validate_on_submit()):
+        # upate the ride collection and append the information to the list of all chat messages
         rideCollection.update_one({"_id" : ObjectId(rideId)}, {'$push' : {'chat' : {'sender': sender, 'message': form.message.data}}})
-        # rideCollection.update_one({"_id": ObjectId(rideId)}, {'$push': {'chat': {'sender': form.sender, 'message': form.message.data}}})
         return redirect('/ride/' + rideId + '/chat')
 
     return render_template('chat.html', ride=ride, form=form)
@@ -255,6 +275,7 @@ def arrived(rideId):
     cursor = conn.cursor()
     cursor.execute("SELECT email FROM users WHERE id=?", (ride.get("riderId"),))
     email = cursor.fetchone()
+    # email the invoice to the user
     msg = Message(subject="heres your invoice!", body=f"Ride for {ride.get('price')}$ completed!",
                         sender="no-reply@IT-Girl-Transport.com",
                         recipients=[current_user.email, email[0]])
@@ -265,8 +286,11 @@ def arrived(rideId):
 @login_required
 def invoice(rideId):
     ride = rideCollection.find_one({"_id": ObjectId(rideId)})
+    # as always, if there is no ride or the currnt users aren't related to the ride, redirect to the index
     if (ride is None or (ride.get("riderId") != current_user.id and ride.get("driverId") != current_user.id)):
         return redirect('/')
+    
+    # if you haven't arrived you can't have an invoice, redirect back to the ride
     if (not ride.get("arrived")):
         return redirect('/ride/' + rideId)
     return render_template('invoice.html', ride=ride)

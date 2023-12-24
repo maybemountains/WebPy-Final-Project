@@ -158,20 +158,25 @@ def login():
         username = form.username.data
         password = form.password.data
         user = fetchUser(username)
-        if (username == "admin" and password == "admin123"):
+        if (username == "admin" and password == "admin123"): # if the username and password are the admin's info
+            # connect to the db, select all users from the db and then send that to the admin.html as we render it
+            # the admin never technically gets logged in proper but it didn't personally feel like they needed to be to me
             conn = getSQLiteDB()
             cursor = conn.cursor()
             cursor.execute("SELECT username, email, isDriver FROM users")
             users = cursor.fetchall()
             return render_template('admin.html', users=users)
+        # otherwise check if the username and password match what we have in the db, and if so log them in and redirect to the index
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
             return redirect('/')
+        # otherwise tell the user that their login credentials are incorrect
         else:
             flash(gettext('Invalid username or password'), 'danger')
     # if no form has been submitted and the user isn't logged in, show the user the login form
     return render_template('login.html', form=form)
 
+# a simple logout route, this just allows users to log out
 @auth_blueprint.route('/logout')
 @login_required
 def logout():

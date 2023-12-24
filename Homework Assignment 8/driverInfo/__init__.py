@@ -25,35 +25,34 @@ carCollection = mongoDB['carInfo']
 @login_required
 def deleteInfo():
     driverId = int(current_user.id)
-    car = carCollection.find_one({"driverID": driverId})
-    if not (car is None):
+    car = carCollection.find_one({"driverID": driverId}) # find a car attached to our driver
+    if not (car is None): # if there was a car, delete that car
         carCollection.delete_one({"driverID": driverId})
-    return redirect('/profile')
+    return redirect('/profile') # otherwise just redirect to their profile again (aka do nothing)
 
 
 @driverInfo_blueprint.route('/editDriver', methods=['GET', 'POST'])
 @login_required
 def editDriver():
     driverId = int(current_user.id)
-    car = carCollection.find_one({"driverID": driverId})
+    car = carCollection.find_one({"driverID": driverId}) # find a car attached to the driver
 
-    if (car):
+    if (car): # if there's a car attached, make sure the form has the data already filled in so they user can decide what they're changing without having to 
+              # rewrite everything from scratch
         form = carForm(data={'carType': car['carType'], 'carColor': car['carColor'], 'licensePlate': car['licensePlate']})
-    else:
+    else: # otherwise, meaning they deleted their car info, fill in the form with empty lines so that we can properly render the form
         form = carForm(data={'carType': '', 'carColor': '', 'licensePlate': ''})
     
     if form.validate_on_submit():
         carType = form.carType.data.lower()
         carColor = form.carColor.data
         licensePlate = form.licensePlate.data
-        # similar to previous, idk if this'll work. but in theory if there's a car already there we're updating the info
-        # otherwise we're creating a new entry so that there's now a car
+        # if there's a car already there we're updating the info otherwise we're creating a new entry so that there's now a car
         if (car): 
             carCollection.find_one_and_update({"driverID" : driverId}, {"$set" : {'carType': carType, 'carColor': carColor, 'licensePlate': licensePlate}})
             # carCollection.update_one({"driverID": driverId}, {'$set': {'carType': carType, 'carColor': carColor, 'licensePlate': licensePlate}})
-        else: 
+        else:  # otherwise if we didn't already have a car, just insert a new entry into the db
             carCollection.insert_one({'carType': carType, 'carColor': carColor, 'licensePlate': licensePlate, "driverID": driverId})
-            # carCollection.insert_one()
         flash(gettext("you edited your car information"))
         return redirect('/profile')
     return render_template('editDriver.html', form=form, edit=True)

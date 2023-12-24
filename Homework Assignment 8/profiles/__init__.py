@@ -16,6 +16,6 @@ profiles_blueprint = Blueprint('profiles', __name__,
 
 @profiles_blueprint.route('/profile')
 @login_required
-def profile():
+def profile(): # make sure to only ever render the current user's car information
     car = carCollection.find_one({"driverID": int(current_user.id)})
     return render_template('profile.html', car=car)
