@@ -1,0 +1,236 @@
+# Albanian translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-12-23 22:11-0500\n"
+"PO-Revision-Date: 2023-12-23 22:15-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: sq\n"
+"Language-Team: sq <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.0\n"
+
+#: app.py:60
+msgid "Destination Longitude"
+msgstr "Longjituda e Destinacionit"
+
+#: app.py:61
+msgid "Destination Latitude"
+msgstr "Gjerësia e Destinacionit"
+
+#: app.py:62
+msgid "Pickup Longitude"
+msgstr "Longjituda e Mberritjes"
+
+#: app.py:63
+msgid "Pickup Latitude"
+msgstr "Gjerësia e Mberritjes"
+
+#: app.py:64 templates/invoice.html:13 templates/pickRide.html:16
+#: templates/ride.html:14
+msgid "Time"
+msgstr "Koha"
+
+#: app.py:65 auth/__init__.py:87 driverInfo/__init__.py:63
+#: profiles/templates/profile.html:52 templates/invoice.html:14
+#: templates/pickRide.html:17 templates/ride.html:15
+msgid "Car Type"
+msgstr "Lloji i Makinës"
+
+#: app.py:66
+msgid "Card Holder Name"
+msgstr "Emri i Mbajtësit të Kartës"
+
+#: app.py:67
+msgid "Card Number"
+msgstr "Numri i Kartës"
+
+#: app.py:68
+msgid "Card Expiration Date"
+msgstr "Data e Skadencës së Kartës"
+
+#: app.py:69
+msgid "CVV"
+msgstr "CVV"
+
+#: app.py:70
+msgid "Request"
+msgstr "Kërkesë"
+
+#: app.py:226
+msgid "Message"
+msgstr "Mesazhi"
+
+#: app.py:227
+msgid "Send"
+msgstr "Dërgo"
+
+#: app.py:237 auth/templates/login.html:145
+msgid "rider"
+msgstr "udhëtar"
+
+#: app.py:237 auth/templates/login.html:145
+msgid "driver"
+msgstr "shofer"
+
+#: auth/__init__.py:72 auth/__init__.py:77 auth/__init__.py:83
+msgid "Username"
+msgstr "Emri i Përdoruesit"
+
+#: auth/__init__.py:73 auth/__init__.py:79 auth/__init__.py:85
+msgid "Password"
+msgstr "Fjalëkalimi"
+
+#: auth/__init__.py:74 auth/templates/login.html:5
+#: auth/templates/login.html:115
+msgid "Login"
+msgstr "Hyrje"
+
+#: auth/__init__.py:78 auth/__init__.py:84
+msgid "Email"
+msgstr "Email"
+
+#: auth/__init__.py:80 auth/__init__.py:89 auth/templates/driverSignup.html:5
+#: auth/templates/driverSignup.html:115 auth/templates/riderSignup.html:5
+#: auth/templates/riderSignup.html:115
+msgid "Sign Up"
+msgstr "Regjistrohu"
+
+#: auth/__init__.py:86 driverInfo/__init__.py:62
+#: profiles/templates/profile.html:54
+msgid "License Plate"
+msgstr "Targa e Makinës"
+
+#: auth/__init__.py:88 driverInfo/__init__.py:64
+#: profiles/templates/profile.html:53
+msgid "Car Color"
+msgstr "Ngjyra e Makinës"
+
+#: auth/__init__.py:115 auth/__init__.py:146
+msgid "Username already taken. Please choose another."
+msgstr "Emri i përdoruesit është marrë. Ju lutemi zgjidhni një tjetër."
+
+#: auth/__init__.py:165
+msgid "Invalid username or password"
+msgstr "Emri i përdoruesit ose fjalëkalimi i pavlefshëm"
+
+#: auth/templates/driverSignup.html:147 auth/templates/riderSignup.html:139
+msgid "Already have an account? Login"
+msgstr "Tashmë keni një llogari? Hyr"
+
+#: auth/templates/login.html:144
+msgid "Don't have an account? Sign up as a"
+msgstr "Nuk keni një llogari? Regjistrohuni si një"
+
+#: auth/templates/login.html:145
+msgid " or "
+msgstr " ose "
+
+#: driverInfo/__init__.py:57
+msgid "you edited your car information"
+msgstr "keni redaktuar informacionin e makinës suaj"
+
+#: driverInfo/__init__.py:65
+msgid "Save"
+msgstr "Ruaj"
+
+#: driverInfo/templates/editDriver.html:5
+#: driverInfo/templates/editDriver.html:115
+msgid "Edit Car Info"
+msgstr "Redakto Informacionin e Makinës"
+
+#: profiles/templates/profile.html:5 profiles/templates/profile.html:50
+msgid "Profile"
+msgstr "Profili"
+
+#: profiles/templates/profile.html:49
+msgid "Home"
+msgstr "Ballina"
+
+#: profiles/templates/profile.html:49
+msgid "Logout"
+msgstr "Çmeldimi"
+
+#: profiles/templates/profile.html:55
+msgid "Edit Driver Info"
+msgstr "Redakto Informacionin e Shoferit"
+
+#: profiles/templates/profile.html:56
+msgid "Delete Driver Info"
+msgstr "Fshi Informacionin e Shoferit"
+
+#: templates/404.html:37
+msgid "Page Not Found"
+msgstr "Faqja Nuk Gjendet"
+
+#: templates/404.html:39
+msgid "I'm sorry, but the page you seem to be looking for simply doesn't exist."
+msgstr "Më vjen keq, por faqja që ju duket se kërkoni thjesht nuk ekziston."
+
+#: templates/404.html:40 templates/500.html:44
+msgid "To get back to home, click"
+msgstr "Për të kthyer në shtëpi, klikoni"
+
+#: templates/404.html:40 templates/500.html:44
+msgid "here"
+msgstr "këtu"
+
+#: templates/500.html:41
+msgid "Internal Server Error"
+msgstr "Gabim i Brendshëm i Serverit"
+
+#: templates/500.html:43
+msgid ""
+"Apologies for the inconvenience, it seems like an error happened on our "
+"end, please try again!"
+msgstr ""
+"Na vjen keq për disavantazhin, duket se ka ndodhur një gabim nga ana jonë, "
+"ju lutemi provoni përsëri!"
+
+#: templates/chat.html:19 templates/waitForDriver.html:13
+msgid "Refresh"
+msgstr "Rifresko"
+
+#: templates/invoice.html:11 templates/pickRide.html:14 templates/ride.html:12
+msgid "Pickup"
+msgstr "Marrje"
+
+#: templates/invoice.html:12 templates/pickRide.html:15 templates/ride.html:13
+msgid "Destination"
+msgstr "Destinacion"
+
+#: templates/invoice.html:15
+msgid "Price"
+msgstr "Çmimi"
+
+#: templates/pickRide.html:18
+msgid "Select this ride"
+msgstr "Zgjidh këtë udhëtim"
+
+#: templates/requestRide.html:5 templates/requestRide.html:116
+msgid "Request a Ride"
+msgstr "Kërko një udhëtim"
+
+#: templates/ride.html:17
+msgid "Chat"
+msgstr "Bisedë"
+
+#: templates/ride.html:18
+msgid "Arrived"
+msgstr "Ka mbërritur"
+
+#: templates/waitForDriver.html:11
+msgid "Waiting for a driver to accept your ride request"
+msgstr "Duke pritur që një shofer të pranojë kërkesën tuaj për udhëtim"
+
+#: templates/waitForDriver.html:12
+msgid "Cancel"
+msgstr "Anulo"

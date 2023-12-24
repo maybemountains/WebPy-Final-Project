@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title> {{gettext("Profile")}} </title>
+    <style>
+        .index {
+            text-align: center;
+            margin: auto;
+            background-size: cover;
+            background-color: #e47386;
+        }
+        
+        .productHolder {
+            background-color: rgba(240, 248, 255, 0.465);
+            border-radius: 20px;
+        }
+        
+        .button-holder {
+            justify-content: end;
+            display: flex;
+        }
+        
+        .button {
+            background-color: #bb9be5;
+            text-decoration: none;
+            border-radius: 15px;
+            border: black;
+            color: black;
+            text-align: center;
+            padding: 10px;
+            display: inline-block;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 1em;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+            transition: 0.3s;
+        }
+        
+        .button:hover {
+            background-color: #b585f3;
+            cursor: pointer;
+        }
+    </style>
+</head> 
+
+<body class="index">
+    <div class="button-holder"><a class="button" href="/">{{gettext("Home")}}</a><a class="button" href="/logout">{{gettext("Logout")}}</a></div>
+    <h1>{{gettext("Profile")}}</h1>
+    <div class="productHolder">
+        <p><b>{{gettext("Car Type")}}: </b>{{ car.carType }}</p>
+        <p><b>{{gettext("Car Color")}}: </b>{{ car.carColor }}</p>
+        <p><b>{{gettext("License Plate")}}: </b>{{ car.licensePlate }}</p>
+        <a href="/editDriver">{{gettext("Edit Driver Info")}}</a>
+        <a href="/deleteDriverInfo">{{gettext("Delete Driver Info")}}</a>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+# French translations for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-12-23 22:11-0500\n"
+"PO-Revision-Date: 2023-12-23 22:15-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.0\n"
+
+#: app.py:60
+msgid "Destination Longitude"
+msgstr "Longitude de Destination"
+
+#: app.py:61
+msgid "Destination Latitude"
+msgstr "Latitude de Destination"
+
+#: app.py:62
+msgid "Pickup Longitude"
+msgstr "Longitude de Ramassage"
+
+#: app.py:63
+msgid "Pickup Latitude"
+msgstr "Latitude de Ramassage"
+
+#: app.py:64 templates/invoice.html:13 templates/pickRide.html:16
+#: templates/ride.html:14
+msgid "Time"
+msgstr "Heure"
+
+#: app.py:65 auth/__init__.py:87 driverInfo/__init__.py:63
+#: profiles/templates/profile.html:52 templates/invoice.html:14
+#: templates/pickRide.html:17 templates/ride.html:15
+msgid "Car Type"
+msgstr "Type de Voiture"
+
+#: app.py:66
+msgid "Card Holder Name"
+msgstr "Nom du Titulaire de la Carte"
+
+#: app.py:67
+msgid "Card Number"
+msgstr "Numéro de Carte"
+
+#: app.py:68
+msgid "Card Expiration Date"
+msgstr "Date d'Expiration de la Carte"
+
+#: app.py:69
+msgid "CVV"
+msgstr "CVV"
+
+#: app.py:70
+msgid "Request"
+msgstr "Demande"
+
+#: app.py:226
+msgid "Message"
+msgstr "Message"
+
+#: app.py:227
+msgid "Send"
+msgstr "Envoyer"
+
+#: app.py:237 auth/templates/login.html:145
+msgid "rider"
+msgstr "passager"
+
+#: app.py:237 auth/templates/login.html:145
+msgid "driver"
+msgstr "conducteur"
+
+#: auth/__init__.py:72 auth/__init__.py:77 auth/__init__.py:83
+msgid "Username"
+msgstr "Nom d'Utilisateur"
+
+#: auth/__init__.py:73 auth/__init__.py:79 auth/__init__.py:85
+msgid "Password"
+msgstr "Mot de Passe"
+
+#: auth/__init__.py:74 auth/templates/login.html:5
+#: auth/templates/login.html:115
+msgid "Login"
+msgstr "Connexion"
+
+#: auth/__init__.py:78 auth/__init__.py:84
+msgid "Email"
+msgstr "Email"
+
+#: auth/__init__.py:80 auth/__init__.py:89 auth/templates/driverSignup.html:5
+#: auth/templates/driverSignup.html:115 auth/templates/riderSignup.html:5
+#: auth/templates/riderSignup.html:115
+msgid "Sign Up"
+msgstr "S'Inscrire"
+
+#: auth/__init__.py:86 driverInfo/__init__.py:62
+#: profiles/templates/profile.html:54
+msgid "License Plate"
+msgstr "Plaque d'Immatriculation"
+
+#: auth/__init__.py:88 driverInfo/__init__.py:64
+#: profiles/templates/profile.html:53
+msgid "Car Color"
+msgstr "Couleur de la Voiture"
+
+#: auth/__init__.py:115 auth/__init__.py:146
+msgid "Username already taken. Please choose another."
+msgstr "Nom d'utilisateur déjà pris. Veuillez en choisir un autre."
+
+#: auth/__init__.py:165
+msgid "Invalid username or password"
+msgstr "Nom d'utilisateur ou mot de passe invalide"
+
+#: auth/templates/driverSignup.html:147 auth/templates/riderSignup.html:139
+msgid "Already have an account? Login"
+msgstr "Vous avez déjà un compte ? Connectez-vous"
+
+#: auth/templates/login.html:144
+msgid "Don't have an account? Sign up as a"
+msgstr "Vous n'avez pas de compte ? Inscrivez-vous en tant que"
+
+#: auth/templates/login.html:145
+msgid " or "
+msgstr " ou "
+
+#: driverInfo/__init__.py:57
+msgid "you edited your car information"
+msgstr "vous avez modifié les informations de votre voiture"
+
+#: driverInfo/__init__.py:65
+msgid "Save"
+msgstr "Enregistrer"
+
+#: driverInfo/templates/editDriver.html:5
+#: driverInfo/templates/editDriver.html:115
+msgid "Edit Car Info"
+msgstr "Modifier les Infos de la Voiture"
+
+#: profiles/templates/profile.html:5 profiles/templates/profile.html:50
+msgid "Profile"
+msgstr "Profil"
+
+#: profiles/templates/profile.html:49
+msgid "Home"
+msgstr "Accueil"
+
+#: profiles/templates/profile.html:49
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: profiles/templates/profile.html:55
+msgid "Edit Driver Info"
+msgstr "Modifier les Infos du Conducteur"
+
+#: profiles/templates/profile.html:56
+msgid "Delete Driver Info"
+msgstr "Supprimer les Infos du Conducteur"
+
+#: templates/404.html:37
+msgid "Page Not Found"
+msgstr "Page Non Trouvée"
+
+#: templates/404.html:39
+msgid "I'm sorry, but the page you seem to be looking for simply doesn't exist."
+msgstr "Je suis désolé, mais la page que vous semblez chercher n'existe tout simplement pas."
+
+#: templates/404.html:40 templates/500.html:44
+msgid "To get back to home, click"
+msgstr "Pour revenir à la page d'accueil, cliquez sur"
+
+#: templates/404.html:40 templates/500.html:44
+msgid "here"
+msgstr "ici"
+
+#: templates/500.html:41
+msgid "Internal Server Error"
+msgstr "Erreur Interne du Serveur"
+
+#: templates/500.html:43
+msgid ""
+"Apologies for the inconvenience, it seems like an error happened on our "
+"end, please try again!"
+msgstr ""
+"Nous nous excusons pour la gêne occasionnée, il semble qu'une erreur s'est produite de notre "
+"côté, veuillez réessayer !"
+
+#: templates/chat.html:19 templates/waitForDriver.html:13
+msgid "Refresh"
+msgstr "Actualiser"
+
+#: templates/invoice.html:11 templates/pickRide.html:14 templates/ride.html:12
+msgid "Pickup"
+msgstr "Ramassage"
+
+#: templates/invoice.html:12 templates/pickRide.html:15 templates/ride.html:13
+msgid "Destination"
+msgstr "Destination"
+
+#: templates/invoice.html:15
+msgid "Price"
+msgstr "Prix"
+
+#: templates/pickRide.html:18
+msgid "Select this ride"
+msgstr "Sélectionner cette course"
+
+#: templates/requestRide.html:5 templates/requestRide.html:116
+msgid "Request a Ride"
+msgstr "Demander une Course"
+
+#: templates/ride.html:17
+msgid "Chat"
+msgstr "Discussion"
+
+#: templates/ride.html:18
+msgid "Arrived"
+msgstr "Arrivé"
+
+#: templates/waitForDriver.html:11
+msgid "Waiting for a driver to accept your ride request"
+msgstr "En attente qu'un conducteur accepte votre demande de course"
+
+#: templates/waitForDriver.html:12
+msgid "Cancel"
+msgstr "Annuler"

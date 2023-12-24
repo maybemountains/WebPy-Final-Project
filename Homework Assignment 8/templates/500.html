@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> 500 </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@300;400&family=Questrial&display=swap');
+        /* This just gives us our font */
+
+        body {
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        html {
+            margin: 0;
+        }
+
+        .flexy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .submit-btn:hover {
+            background-color: #b585f3;
+        }
+
+        .image {
+            width: 30%;
+            align-self: center;
+        }
+
+    </style>
+</head>
+
+<body class="flexy">
+    <div class="flexy">
+        <h1>{{gettext("Internal Server Error")}}</h1>
+        <img src="/static/nope.jpeg" class="image">
+        <p>{{gettext("Apologies for the inconvenience, it seems like an error happened on our end, please try again!")}}</p>
+        <p> {{gettext("To get back to home, click")}} <a href="/">{{gettext("here")}}</a></p>
+    </div>
+</body>
+
+</html>

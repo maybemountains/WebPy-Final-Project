@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rides</title>
+    <style>
+        body {
+            text-align: center;
+            margin: auto;
+            background-size: cover;
+            background-color: #e47386;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- {% set rideRequests = pendingRideRequests %} -->
+
+    <p>Selecting...</p>
+
+    {% for ride in pendingRideRequests.values() %}
+    <div>
+        <p>{{gettext("Pickup")}}: [Lat = {{ride[0].pickupLat}} | Long = {{ride[0].pickupLong}}]</p>
+        <p>{{gettext("Destination")}}: [Lat = {{ride[0].lat}} | Long = {{ride[0].long}}]</p>
+        <p>{{gettext("Time")}}: {{ride[0].time }}</p>
+        <p>{{gettext("Car Type")}}: {{ ride[0].carType }}</p>
+        <a href="/selectRide/{{ride[0].carType}}/{{ride[0].riderId}}">{{gettext("Select this ride")}}</a>
+    </div>
+    {% endfor %}
+</body>
+
+</html>

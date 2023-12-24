@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> {{gettext("Edit Car Info")}} </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@300;400&family=Questrial&display=swap');
+        /* This just gives us our font */
+        
+        a {
+            text-decoration: none;
+        }
+        
+        body {
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        html {
+            margin: 0;
+            background-color: #e47386;
+        }
+        
+        label {
+            font-family: Questrial;
+            font-size: 11pt;
+        }
+        
+        .flexy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        #card {
+            background: #fbfbfb;
+            border-radius: 8px;
+            box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+            width: 329px;
+        }
+        
+        #card-content {
+            padding: 12px 44px;
+        }
+        
+        #card-title {
+            font-family: "Lexend Peta";
+            letter-spacing: 4px;
+            padding-bottom: 23px;
+            padding-top: 13px;
+            text-align: center;
+        }
+        
+        #login {
+            color: #d835db;
+            font-family: Questrial;
+            font-size: 10pt;
+            margin-top: 16px;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            display: flex;
+            background: #bb9be5;
+            border: none;
+            border-radius: 21px;
+            cursor: pointer;
+            color: white;
+            font-family: Calibri, sans-serif;
+            height: 42.3px;
+            margin: 0 auto;
+            margin-top: 50px;
+            transition: 0.25s;
+            width: 153px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #b585f3;
+        }
+        
+        .form {
+            align-items: left;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-border {
+            background: -webkit-linear-gradient(right, #e076f6, #696bf6);
+            height: 1px;
+            width: 100%;
+            margin-bottom: 10%;
+        }
+        
+        .form-content {
+            background: #fbfbfb;
+            border: none;
+            outline: none;
+            padding-top: 14px;
+        }
+        
+        .underline-title {
+            background: -webkit-linear-gradient(right, #e076f6, #696bf6);
+            height: 2px;
+            margin: -1.1rem auto 0 auto;
+            width: 55%;
+        }
+    </style>
+</head> 
+
+<body class="flexy">
+    <div id="card" class="bigger flexy">
+        <div id="card-content" class="flexy">
+            <div id="card-title">
+                <h2>{{gettext("Edit Car Info")}}</h2>
+                <div class="underline-title"></div>
+            </div>
+            <form method="post">
+                {{ form.hidden_tag() }} 
+
+                {{form.licensePlate.label()}} {{form.licensePlate(class="form-content")}}
+                <div class="form-border"></div>
+
+                {{form.carType.label()}} {{form.carType(class="form-content")}}
+                <div class="form-border"></div>
+
+                {{form.carColor.label()}} {{form.carColor(class="form-content")}}
+                <div class="form-border"></div>
+
+                {% with messages = get_flashed_messages(with_categories=true) %} {% if messages or form.errors %}
+                <ul>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %} {% for field, errors in form.errors.items() %}
+                    <li class="danger">{{ ', '.join(errors) }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %} {% endwith %} {{ form.submit(class="submit-btn")}}
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

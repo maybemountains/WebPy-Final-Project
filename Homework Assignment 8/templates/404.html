@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> 404 </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@300;400&family=Questrial&display=swap');
+        /* This just gives us our font */
+
+        body {
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        html {
+            margin: 0;
+        }
+
+        .flexy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .image {
+            width: 30%;
+            align-self: center;
+        }
+
+    </style>
+</head>
+
+<body class="flexy">
+    <div class="flexy">
+        <h1>{{gettext("Page Not Found")}}</h1>
+        <img src="/static/sorry.jpeg" class="image">
+        <p>{{gettext("I'm sorry, but the page you seem to be looking for simply doesn't exist.")}}</p>
+        <p> {{gettext("To get back to home, click")}} <a href="/">{{gettext("here")}}</a></p>
+    </div>
+</body>
+
+</html>

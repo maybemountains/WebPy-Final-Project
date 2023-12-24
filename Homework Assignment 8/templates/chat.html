@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+            margin: auto;
+            background-size: cover;
+            background-color: #e47386;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <title>Chat</title>
+</head>
+
+<body>
+    {% for message in ride.chat %}
+    <p>{{message.sender}} : {{message.message}}</p>
+    {% endfor %} 
+    <form method="post">
+        {{ form.hidden_tag() }} 
+        {{ form.message.label() }} {{ form.message() }} 
+        {{ form.submit() }}
+    </form>
+    <button onclick="location.reload();">{{gettext("Refresh")}}</button>
+</body>
+
+</html>
